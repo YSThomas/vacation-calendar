@@ -139,7 +139,6 @@ function createElement(){
       vacationElement.appendChild(completeBtn)
 
       completeBtn.addEventListener('click', e => {
-        let element = e.currentTarget;
         if (vacationArray[i].accepted === false){
           vacationArray[i].accepted = true;
           vacationElement.classList.add('accepted');

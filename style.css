@@ -1,0 +1,10 @@
+.vacationElement{
+  margin: 1rem 0;
+  border: #7f7f7f solid 1px;
+  border-radius: 8px;
+  background-color: #abc2ff;
+}
+
+.accepted{
+  background-color: #8dff69;
+}

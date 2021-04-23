@@ -118,7 +118,11 @@ class Vacation {
     this.accepted = !this.accepted
     if (this.accepted === true){
       const newCalendarEvent = new CalendarEvent(this.name, this.range)
-      vacationsArray.splice(this.id, 1);
+      vacationsArray.forEach((e,i) => {
+        if(this.id === e.id){
+          vacationsArray.splice(i, 1);
+        }
+      })
       console.log(this.name + ' одобрен и нужно перекинуть его в календарь')
       calendarEventsArray.push(newCalendarEvent)
       UI.showCalendarEvents()
@@ -153,9 +157,10 @@ document.querySelector('#vacation').addEventListener('submit', (e)=>{ // фор�
 
   const name = document.querySelector('#worker-name')
   const range = document.querySelector('#date-range')
-    const nameHelp = document.querySelector('#workerNameHelp')
+  const nameHelp = document.querySelector('#workerNameHelp')
+  const workerDate = document.querySelector('#workerDate')
 
-  if(name.value.length < 10){
+  if(name.value.length < 10){ // проверка на кол-во символов в имени
 
     nameHelp.classList.remove("text-muted")
     nameHelp.classList.add("text-danger")
@@ -167,6 +172,7 @@ document.querySelector('#vacation').addEventListener('submit', (e)=>{ // фор�
     nameHelp.innerText = 'Введите Ваше имя'
   }
 
+
   const vacation = new Vacation(name.value, range.value)
   vacationsArray.push(vacation)
 
@@ -174,3 +180,5 @@ document.querySelector('#vacation').addEventListener('submit', (e)=>{ // фор�
   UI.showAllVacations()
   UI.showCalendarEvents()
 })
+UI.showAllVacations()
+UI.showCalendarEvents()

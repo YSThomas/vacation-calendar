@@ -15,10 +15,11 @@ function deleteEvent(event) {
   calendar.setDataSource(dataSource.filter(item => item.id == event.id));
 }
 
-$(function() {
-  var currentYear = new Date().getFullYear();
+function createCalendar() {
+  let currentYear = new Date().getFullYear();
 
   calendar = new Calendar('#calendar', {
+    language: 'ru',
     enableContextMenu: true,
     enableRangeSelection: true,
     contextMenuItems:[
@@ -66,4 +67,6 @@ $(function() {
     dataSource: calendarEventsArray
 
   });
-});
+}
+
+createCalendar()

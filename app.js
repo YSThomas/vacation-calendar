@@ -60,7 +60,6 @@ try {
 }
 
 btnAccept.addEventListener('click', (e) =>{
-
   let question = confirm('Убедитесь, что выбраны все необходимые заявки. Подтвердите, если всё верно.')
   if(question === true){
     let i = vacationArray.length;
@@ -163,8 +162,6 @@ function createElement(){
 
 function checkVacationArray(){ // Проверка. Если в массиве 0 заявлений, значит кнопка подтверждения должна отключиться
   if (vacationArray.length === 0){
-    console.log('я хуярю')
-
     allVacations.innerHTML = '<p class="font-weight-light">Заявок нет.</p>';
     btnAccept.setAttribute('disabled', 'disabled');
   }
@@ -174,7 +171,7 @@ function checkVacationArray(){ // Проверка. Если в массиве 0
 
 try{
   createElement();
-  checkVacationArray()
+  checkVacationArray();
 }catch (e){
-  console.error(`Иди своей дорогой, сталкер! ${e}`)
+  console.error(`Иди своей дорогой, сталкер! ${e}`);
 }

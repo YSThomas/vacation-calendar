@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ООП отпуска</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.css" />
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="all col-md-8">
+            <h1>Отпуска, заготовка</h1>
+            <p>С десятой попытки должно получиться</p>
+            <hr>
+
+            <h4>Тут типа отправка заявки</h4>
+            <form class="vacation-form" id="vacation">
+                <div class="form-group">
+                    <label for="worker-name">Имя заявителя:</label>
+                    <input type="text" class="form-control" id="worker-name" aria-describedby="workerNameHelp" placeholder="Введите Ваше имя">
+                    <small id="workerNameHelp" class="form-text text-muted">Введите Ваше имя</small>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" aria-describedby="workerDate" id="date-range" name="date-range">
+                    <small id="workerDate" class="form-text text-muted">Выберите дату</small>
+                </div>
+                <button type="submit" class="btn btn-primary">Отправить</button>
+            </form>
+            <hr>
+
+            <h4>Тут типа вывод всех заявок</h4>
+            <div class="all-vacations"></div>
+            <hr>
+
+            <h4>Тут типа вывод всех одобренных заявок (в идеале должен быть календарь)</h4>
+
+            <div class="all-accepted-vacations"></div>
+        </div>
+        <div class="calendar col-md-12" id="calendar"></div>
+    </div>
+</div>
+
+<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script src="https://unpkg.com/js-year-calendar@latest/dist/js-year-calendar.min.js"></script>
+
+<script src="./datepicker.js"></script>
+<script src="./calendar.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>

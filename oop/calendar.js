@@ -1,19 +1,19 @@
 let calendar = null;
 
-function editEvent(event) {
-  $('#event-modal input[name="event-index"]').val(event ? event.id : '');
-  $('#event-modal input[name="event-name"]').val(event ? event.name : '');
-  $('#event-modal input[name="event-location"]').val(event ? event.location : '');
-  $('#event-modal input[name="event-start-date"]').datepicker('update', event ? event.startDate : '');
-  $('#event-modal input[name="event-end-date"]').datepicker('update', event ? event.endDate : '');
-  $('#event-modal').modal();
-}
-
-function deleteEvent(event) {
-  var dataSource = calendar.getDataSource();
-
-  calendar.setDataSource(dataSource.filter(item => item.id == event.id));
-}
+// function editEvent(event) {
+//   $('#event-modal input[name="event-index"]').val(event ? event.id : '');
+//   $('#event-modal input[name="event-name"]').val(event ? event.name : '');
+//   $('#event-modal input[name="event-location"]').val(event ? event.location : '');
+//   $('#event-modal input[name="event-start-date"]').datepicker('update', event ? event.startDate : '');
+//   $('#event-modal input[name="event-end-date"]').datepicker('update', event ? event.endDate : '');
+//   $('#event-modal').modal();
+// }
+//
+// function deleteEvent(event) {
+//   var dataSource = calendar.getDataSource();
+//
+//   calendar.setDataSource(dataSource.filter(item => item.id == event.id));
+// }
 
 function createCalendar() {
   let currentYear = new Date().getFullYear();
@@ -22,19 +22,19 @@ function createCalendar() {
     language: 'ru',
     enableContextMenu: true,
     enableRangeSelection: true,
-    contextMenuItems:[
-      {
-        text: 'Update',
-        click: editEvent
-      },
-      {
-        text: 'Delete',
-        click: deleteEvent
-      }
-    ],
-    selectRange: function(e) {
-      editEvent({ startDate: e.startDate, endDate: e.endDate });
-    },
+    // contextMenuItems:[
+    //   {
+    //     text: 'Update',
+    //     click: editEvent
+    //   },
+    //   {
+    //     text: 'Delete',
+    //     click: deleteEvent
+    //   }
+    // ],
+    // selectRange: function(e) {
+    //   editEvent({ startDate: e.startDate, endDate: e.endDate });
+    // },
     mouseOnDay: function(e) {
       if(e.events.length > 0) {
         var content = '';

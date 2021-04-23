@@ -69,6 +69,7 @@ class UI {
         allBtnSuccess[i].addEventListener('click', () =>{ // при нажатии на Одобрить :)
           vacationsArray[i].toggle() //Меняем .accepted на противоположное
 
+          createCalendar();
           UI.showAllVacations() // Подгружаем результат
         })
 
@@ -95,11 +96,26 @@ class UI {
             <div class="vacations-item card-body">
               <h5 class="vacations-item-name card-title">${calendarEventsArray[i].name}</h5>
               <p class="vacations-item-range card-text">Даты: начало - <span>${calendarEventsArray[i].startDate}, окончание - ${calendarEventsArray[i].endDate}</span></p>
-              <button class="btn btn-danger btnDelete">Удалить</button>
+              <button class="btn btn-danger btnDeleteEvent">Удалить</button>
             </div>
         `
       eventsDiv.appendChild(card)
+
+
+
     })
+      const btnDeleteEvent = document.querySelectorAll('.btnDeleteEvent')
+      btnDeleteEvent.forEach((e, i)=>{
+        e.addEventListener('click',()=>{
+          calendarEventsArray.splice(i, 1)
+
+          createCalendar()
+          UI.showAllVacations()
+          UI.showCalendarEvents()
+        })
+      })
+
+
   }
 
   static clearVacationInputs(){ // очистка полей ввода в форме заявки
@@ -133,11 +149,11 @@ class Vacation {
 class CalendarEvent {
   constructor(name, range) {
     const startYear = Number(range.split('-')[0].split('/')[2])
-    const startMonth = Number(range.split('-')[0].split('/')[1])
+    const startMonth = Number(range.split('-')[0].split('/')[1])-1
     const startDay = Number(range.split('-')[0].split('/')[0])
 
     const endYear = Number(range.split('-')[1].split('/')[2])
-    const endMonth = Number(range.split('-')[1].split('/')[1])
+    const endMonth = Number(range.split('-')[1].split('/')[1])-1
     const endDay = Number(range.split('-')[1].split('/')[0])
 
     this.color = `#${Math.floor(Math.random()*16777215).toString(16)}`;
@@ -180,5 +196,7 @@ document.querySelector('#vacation').addEventListener('submit', (e)=>{ // фор�
   UI.showAllVacations()
   UI.showCalendarEvents()
 })
+
+createCalendar()
 UI.showAllVacations()
 UI.showCalendarEvents()

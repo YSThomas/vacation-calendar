@@ -65,8 +65,5 @@ function createCalendar() {
       $(e.element).popover('hide');
     },
     dataSource: calendarEventsArray
-
   });
 }
-
-createCalendar()

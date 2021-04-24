@@ -29,19 +29,50 @@ let vacationsArray = [
 ]
 
 let calendarEventsArray = [
-  {
-    id: 0,
-    name: 'Google I/O',
-    location: 'San Francisco, CA',
-    startDate: new Date(2021, 4, 28),
-    endDate: new Date(2021, 4, 29)
-  }
+  // {
+  //   id: 0,
+  //   name: 'Google I/O',
+  //   location: 'San Francisco, CA',
+  //   startDate: new Date(2021, 4, 28),
+  //   endDate: new Date(2021, 4, 29)
+  // }
 ]
 
 //КЛАССЫ
 
 class Store {
-  //В будущем локальное хранилище
+  static load(){ // Загрузка хранилища
+    let storageVacations = JSON.parse(localStorage.getItem('vacationsArray'))
+    let storageEvents = JSON.parse(localStorage.getItem('calendarEventsArray'))
+
+
+    try{
+      storageVacations.forEach((e, i) =>{
+        vacationsArray.push(Object.assign(new Vacation(e.name, e.range), vacationsArray[i]))
+      })
+      storageEvents.forEach((e, i) =>{
+        let start = moment(new Date(e.startDate)).format('DD/MM/YYYY')
+        let end = moment(new Date(e.endDate)).format('DD/MM/YYYY')
+        e.range = String(start + ' - ' + end)
+        calendarEventsArray.push(Object.assign(new CalendarEvent(e.name, e.range), calendarEventsArray[i]))
+      })
+    }catch (e){
+      console.log(e)
+    }
+
+    UI.showAllVacations()
+    UI.showCalendarEvents()
+    createCalendar()
+  }
+
+  static save(){ // Сохранение в хранилище
+    let storageVacations = localStorage.setItem('vacationsArray', JSON.stringify(vacationsArray))
+    let storageEvents = localStorage.setItem('calendarEventsArray', JSON.stringify(calendarEventsArray))
+
+    UI.showAllVacations()
+    UI.showCalendarEvents()
+    createCalendar()
+  }
 }
 
 class UI {
@@ -68,8 +99,8 @@ class UI {
         const allBtnSuccess = document.querySelectorAll('.btnAccepted') // кнопки Одобрить :)
         allBtnSuccess[i].addEventListener('click', () =>{ // при нажатии на Одобрить :)
           vacationsArray[i].toggle() //Меняем .accepted на противоположное
-
-          createCalendar();
+          
+          Store.save()
           UI.showAllVacations() // Подгружаем результат
         })
 
@@ -78,12 +109,14 @@ class UI {
           vacationsArray.splice(i, 1);
           console.log('Удален ' + i);
 
+          Store.save()
+
           UI.showAllVacations() // Подгружаем результат
         })
       })
   }
 
-  static showCalendarEvents(){
+  static showCalendarEvents(){ // обновление всех ивентов календаря
     const eventsDiv = document.querySelector(".all-accepted-vacations") //все принятые заявки в этом диве
     eventsDiv.innerHTML= ''
 
@@ -112,6 +145,8 @@ class UI {
           createCalendar()
           UI.showAllVacations()
           UI.showCalendarEvents()
+
+          Store.save()
         })
       })
 
@@ -123,7 +158,7 @@ class UI {
   }
 }
 
-class Vacation {
+class Vacation { // Класс Отпуск
   constructor(name, range) {
     this.id = vacationsArray.length
     this.name = name
@@ -146,7 +181,7 @@ class Vacation {
   }
 }
 
-class CalendarEvent {
+class CalendarEvent { // Класс Ивент
   constructor(name, range) {
     const startYear = Number(range.split('-')[0].split('/')[2])
     const startMonth = Number(range.split('-')[0].split('/')[1])-1
@@ -192,6 +227,8 @@ document.querySelector('#vacation').addEventListener('submit', (e)=>{ // фор�
   const vacation = new Vacation(name.value, range.value)
   vacationsArray.push(vacation)
 
+  Store.save()
+
   UI.clearVacationInputs()
   UI.showAllVacations()
   UI.showCalendarEvents()
@@ -200,3 +237,4 @@ document.querySelector('#vacation').addEventListener('submit', (e)=>{ // фор�
 createCalendar()
 UI.showAllVacations()
 UI.showCalendarEvents()
+Store.load()
